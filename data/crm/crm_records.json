@@ -1,0 +1,39 @@
+{
+  "client_001": {
+    "client_id": "client_001",
+    "risk_tolerance": "moderate",
+    "goals": [
+      "retirement",
+      "college_fund"
+    ],
+    "last_contact": "2026-07-15",
+    "advisor_notes": "Prefers quarterly check-ins."
+  },
+  "client_002": {
+    "client_id": "client_002",
+    "risk_tolerance": "aggressive",
+    "goals": [
+      "wealth_growth"
+    ],
+    "last_contact": "2026-06-01",
+    "advisor_notes": null
+  },
+  "client_003": {
+    "client_id": "client_003",
+    "risk_tolerance": "conservative",
+    "goals": [
+      "capital_preservation"
+    ],
+    "last_contact": null,
+    "advisor_notes": null
+  },
+  "client_005": {
+    "client_id": "client_005",
+    "risk_tolerance": "moderate",
+    "goals": [
+      "retirement"
+    ],
+    "last_contact": "2026-05-10",
+    "advisor_notes": null
+  }
+}
