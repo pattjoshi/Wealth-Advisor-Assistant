@@ -13,6 +13,7 @@ from wealth_advisor.agents.insight import InsightAgent
 from wealth_advisor.config import settings
 from wealth_advisor.graph.builder import build_graph
 from wealth_advisor.graph.state import new_state
+from wealth_advisor.observability.logging import configure_logging
 from wealth_advisor.schemas.report import AdvisoryReport
 from wealth_advisor.services.mock_crm import MockCrmService
 from wealth_advisor.tools.anomaly_detection import AnomalyDetectionTool
@@ -77,6 +78,7 @@ def main(argv: list[str] | None = None) -> int:
     args = parser.parse_args(argv)
 
     if args.command == "run":
+        configure_logging(log_level=settings.log_level, log_file=settings.log_file)
         crm_failure_rate = 1.0 if args.simulate_crm_failure else None
         report = run_client(args.client, crm_failure_rate=crm_failure_rate)
         sys.stdout.write(report.model_dump_json(indent=2) + "\n")

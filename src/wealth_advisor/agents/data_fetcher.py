@@ -4,6 +4,7 @@ from typing import Any
 
 from wealth_advisor.agents.base import BaseAgent, trace_entry
 from wealth_advisor.graph.state import WealthAdvisorState
+from wealth_advisor.observability.trace import log_tool_call
 from wealth_advisor.tools.client_data import ClientDataTool
 from wealth_advisor.tools.crm import CrmTool
 
@@ -28,7 +29,9 @@ class DataFetcherAgent(BaseAgent):
         degraded_sources: list[str] = []
 
         client_result = self._client_data_tool.execute(client_id=client_id)
-        trace.append(trace_entry(self.name, "client_data_tool", client_result))
+        client_entry = trace_entry(self.name, "client_data_tool", client_result)
+        trace.append(client_entry)
+        log_tool_call(state, client_entry)
 
         client_data: dict[str, Any] | None = None
         status = "running"
@@ -46,7 +49,9 @@ class DataFetcherAgent(BaseAgent):
             status = "failed"
 
         crm_result = self._crm_tool.execute(client_id=client_id)
-        trace.append(trace_entry(self.name, "crm_tool", crm_result))
+        crm_entry = trace_entry(self.name, "crm_tool", crm_result)
+        trace.append(crm_entry)
+        log_tool_call(state, crm_entry)
 
         crm_profile: dict[str, Any] | None = None
         if crm_result.ok:

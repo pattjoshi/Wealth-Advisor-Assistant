@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-from collections.abc import Callable
 from typing import Any
 
 from langgraph.graph import END, StateGraph
@@ -9,8 +8,9 @@ from langgraph.graph.state import CompiledStateGraph
 from wealth_advisor.agents.analyzer import AnalyzerAgent
 from wealth_advisor.agents.data_fetcher import DataFetcherAgent
 from wealth_advisor.agents.insight import InsightAgent
-from wealth_advisor.graph.orchestrator import route
+from wealth_advisor.graph.orchestrator import decide
 from wealth_advisor.graph.state import WealthAdvisorState
+from wealth_advisor.observability.trace import log_routing_decision, wrap_node
 
 _ROUTE_MAP = {
     "data_fetcher": "data_fetcher",
@@ -26,32 +26,29 @@ def build_graph(
     insight: InsightAgent,
 ) -> CompiledStateGraph:
     """Builder pattern: assembles the supervisor/hub-and-spoke StateGraph. Every agent
-    node returns to the router (`route`), which reads state and decides what runs
-    next — the agents themselves never decide their own successor."""
+    node returns to the router (`_route_and_log`), which reads state and decides what
+    runs next — the agents themselves never decide their own successor. Every node is
+    wrapped for logging, timing, and a global exception safety net (see
+    observability/trace.py)."""
     graph = StateGraph(WealthAdvisorState)
 
-    graph.add_node("data_fetcher", _count_step(data_fetcher.run))
-    graph.add_node("analyzer", _count_step(analyzer.run))
-    graph.add_node("insight", _count_step(insight.run))
+    graph.add_node("data_fetcher", wrap_node("data_fetcher", data_fetcher.run))
+    graph.add_node("analyzer", wrap_node("analyzer", analyzer.run))
+    graph.add_node("insight", wrap_node("insight", insight.run))
     graph.add_node("finalize", _finalize)
 
-    graph.set_conditional_entry_point(route, _ROUTE_MAP)
+    graph.set_conditional_entry_point(_route_and_log, _ROUTE_MAP)
     for node_name in ("data_fetcher", "analyzer", "insight"):
-        graph.add_conditional_edges(node_name, route, _ROUTE_MAP)
+        graph.add_conditional_edges(node_name, _route_and_log, _ROUTE_MAP)
     graph.add_edge("finalize", END)
 
     return graph.compile()
 
 
-def _count_step(
-    fn: Callable[[WealthAdvisorState], dict[str, Any]],
-) -> Callable[[WealthAdvisorState], dict[str, Any]]:
-    def node(state: WealthAdvisorState) -> dict[str, Any]:
-        update = fn(state)
-        update["step_count"] = state.get("step_count", 0) + 1
-        return update
-
-    return node
+def _route_and_log(state: WealthAdvisorState) -> str:
+    next_node, reason = decide(state)
+    log_routing_decision(state, next_node, reason)
+    return next_node
 
 
 def _finalize(state: WealthAdvisorState) -> dict[str, Any]:

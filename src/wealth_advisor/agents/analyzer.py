@@ -4,6 +4,7 @@ from typing import Any
 
 from wealth_advisor.agents.base import BaseAgent, trace_entry
 from wealth_advisor.graph.state import WealthAdvisorState
+from wealth_advisor.observability.trace import log_tool_call
 from wealth_advisor.schemas.client import ClientProfile
 from wealth_advisor.schemas.crm import CrmProfile
 from wealth_advisor.tools.anomaly_detection import AnomalyDetectionTool
@@ -51,7 +52,9 @@ class AnalyzerAgent(BaseAgent):
         crm_profile = CrmProfile.model_validate(crm_data) if crm_data else None
 
         metrics_result = self._portfolio_metrics_tool.execute(client=client)
-        trace.append(trace_entry(self.name, "portfolio_metrics_tool", metrics_result))
+        metrics_entry = trace_entry(self.name, "portfolio_metrics_tool", metrics_result)
+        trace.append(metrics_entry)
+        log_tool_call(state, metrics_entry)
         metrics: dict[str, Any] = metrics_result.data if metrics_result.ok else {}
         if not metrics_result.ok:
             errors.append(f"{self.name}: portfolio metrics failed: {metrics_result.error}")
@@ -59,7 +62,9 @@ class AnalyzerAgent(BaseAgent):
         anomaly_result = self._anomaly_detection_tool.execute(
             client=client, metrics=metrics, crm_profile=crm_profile
         )
-        trace.append(trace_entry(self.name, "anomaly_detection_tool", anomaly_result))
+        anomaly_entry = trace_entry(self.name, "anomaly_detection_tool", anomaly_result)
+        trace.append(anomaly_entry)
+        log_tool_call(state, anomaly_entry)
 
         if not anomaly_result.ok:
             errors.append(f"{self.name}: anomaly detection failed: {anomaly_result.error}")
