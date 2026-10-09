@@ -1,0 +1,30 @@
+{
+  "client_id": "client_005",
+  "full_name": "Elena Petrova",
+  "date_of_birth": "1982-02-14",
+  "base_currency": "USD",
+  "accounts": [
+    {
+      "account_id": "A005-BRK",
+      "account_type": "brokerage",
+      "balance": 30000.0,
+      "holdings": [
+        {
+          "symbol": "AAPL",
+          "asset_class": "equity",
+          "quantity": 100,
+          "value": 30000.0
+        }
+      ]
+    }
+  ],
+  "transactions": [
+    {
+      "date": "2026-08-31",
+      "amount": "not-a-number",
+      "category": "misc",
+      "payee": "Unknown",
+      "type": "debit"
+    }
+  ]
+}

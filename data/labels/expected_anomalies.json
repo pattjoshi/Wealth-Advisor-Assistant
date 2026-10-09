@@ -1,0 +1,24 @@
+{
+  "client_002": [
+    {
+      "type": "large_transfer",
+      "transaction_id": "T002-A1"
+    },
+    {
+      "type": "duplicate_payment",
+      "transaction_ids": [
+        "T002-A2a",
+        "T002-A2b"
+      ]
+    },
+    {
+      "type": "spending_spike",
+      "category": "shopping"
+    },
+    {
+      "type": "concentration",
+      "account_id": "A002-BRK",
+      "symbol": "TSLA"
+    }
+  ]
+}

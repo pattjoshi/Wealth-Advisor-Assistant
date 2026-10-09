@@ -14,7 +14,7 @@ Every phase file follows the same structure:
 | Phase | Topic | Status |
 |---|---|---|
 | [0](phase-0.md) | Setup — repo, tooling, config | Done |
-| [1](phase-1.md) | Schemas and mock data | Not started |
+| [1](phase-1.md) | Schemas and mock data | Done |
 | [2](phase-2.md) | Tool layer and mock CRM | Not started |
 | [3](phase-3.md) | Agents, graph and CLI (MVP) | Not started |
 | [4](phase-4.md) | Logging and hardening | Not started |

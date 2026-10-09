@@ -1,0 +1,140 @@
+{
+  "client_id": "client_001",
+  "full_name": "Alice Morgan",
+  "date_of_birth": "1978-04-12",
+  "base_currency": "USD",
+  "accounts": [
+    {
+      "account_id": "A001-BRK",
+      "account_type": "brokerage",
+      "balance": 185000.0,
+      "holdings": [
+        {
+          "symbol": "VTI",
+          "asset_class": "equity",
+          "sector": "broad_market",
+          "quantity": 400,
+          "value": 90000.0
+        },
+        {
+          "symbol": "BND",
+          "asset_class": "bond",
+          "sector": "fixed_income",
+          "quantity": 600,
+          "value": 55000.0
+        },
+        {
+          "symbol": "VNQ",
+          "asset_class": "real_estate",
+          "sector": "reit",
+          "quantity": 300,
+          "value": 40000.0
+        }
+      ]
+    },
+    {
+      "account_id": "A001-CHK",
+      "account_type": "checking",
+      "balance": 22000.0,
+      "holdings": []
+    }
+  ],
+  "transactions": [
+    {
+      "transaction_id": "T001-000",
+      "date": "2026-06-06",
+      "amount": 87.51,
+      "category": "groceries",
+      "payee": "Groceries Co",
+      "type": "debit"
+    },
+    {
+      "transaction_id": "T001-001",
+      "date": "2026-06-14",
+      "amount": 24.77,
+      "category": "utilities",
+      "payee": "Utilities Co",
+      "type": "debit"
+    },
+    {
+      "transaction_id": "T001-002",
+      "date": "2026-06-16",
+      "amount": 54.98,
+      "category": "dining",
+      "payee": "Dining Co",
+      "type": "debit"
+    },
+    {
+      "transaction_id": "T001-003",
+      "date": "2026-06-17",
+      "amount": 100.86,
+      "category": "transport",
+      "payee": "Transport Co",
+      "type": "debit"
+    },
+    {
+      "transaction_id": "T001-004",
+      "date": "2026-06-20",
+      "amount": 24.25,
+      "category": "entertainment",
+      "payee": "Entertainment Co",
+      "type": "debit"
+    },
+    {
+      "transaction_id": "T001-005",
+      "date": "2026-07-01",
+      "amount": 51.81,
+      "category": "groceries",
+      "payee": "Groceries Co",
+      "type": "debit"
+    },
+    {
+      "transaction_id": "T001-006",
+      "date": "2026-07-04",
+      "amount": 123.98,
+      "category": "utilities",
+      "payee": "Utilities Co",
+      "type": "debit"
+    },
+    {
+      "transaction_id": "T001-007",
+      "date": "2026-07-08",
+      "amount": 107.19,
+      "category": "dining",
+      "payee": "Dining Co",
+      "type": "debit"
+    },
+    {
+      "transaction_id": "T001-008",
+      "date": "2026-08-11",
+      "amount": 55.27,
+      "category": "transport",
+      "payee": "Transport Co",
+      "type": "debit"
+    },
+    {
+      "transaction_id": "T001-009",
+      "date": "2026-08-17",
+      "amount": 114.28,
+      "category": "entertainment",
+      "payee": "Entertainment Co",
+      "type": "debit"
+    },
+    {
+      "transaction_id": "T001-010",
+      "date": "2026-08-23",
+      "amount": 149.51,
+      "category": "groceries",
+      "payee": "Groceries Co",
+      "type": "debit"
+    },
+    {
+      "transaction_id": "T001-011",
+      "date": "2026-08-28",
+      "amount": 21.04,
+      "category": "utilities",
+      "payee": "Utilities Co",
+      "type": "debit"
+    }
+  ]
+}

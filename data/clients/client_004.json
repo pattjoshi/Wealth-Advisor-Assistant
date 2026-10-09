@@ -1,0 +1,56 @@
+{
+  "client_id": "client_004",
+  "full_name": "Derek Nguyen",
+  "date_of_birth": "1990-06-20",
+  "base_currency": "USD",
+  "accounts": [
+    {
+      "account_id": "A004-CHK",
+      "account_type": "checking",
+      "balance": 15000.0,
+      "holdings": []
+    }
+  ],
+  "transactions": [
+    {
+      "transaction_id": "T004-000",
+      "date": "2026-06-13",
+      "amount": 53.8,
+      "category": "groceries",
+      "payee": "Grocery Co",
+      "type": "debit"
+    },
+    {
+      "transaction_id": "T004-001",
+      "date": "2026-07-05",
+      "amount": 27.05,
+      "category": "groceries",
+      "payee": "Grocery Co",
+      "type": "debit"
+    },
+    {
+      "transaction_id": "T004-002",
+      "date": "2026-07-07",
+      "amount": 71.0,
+      "category": "groceries",
+      "payee": "Grocery Co",
+      "type": "debit"
+    },
+    {
+      "transaction_id": "T004-003",
+      "date": "2026-07-26",
+      "amount": 35.91,
+      "category": "groceries",
+      "payee": "Grocery Co",
+      "type": "debit"
+    },
+    {
+      "transaction_id": "T004-004",
+      "date": "2026-08-04",
+      "amount": 101.73,
+      "category": "groceries",
+      "payee": "Grocery Co",
+      "type": "debit"
+    }
+  ]
+}

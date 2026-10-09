@@ -44,6 +44,9 @@ select = ["E", "F", "W", "I", "N", "UP", "B", "A", "C4", "SIM", "RUF", "T20"]
 [tool.ruff.lint.isort]
 known-first-party = ["wealth_advisor"]
 
+[tool.ruff.lint.per-file-ignores]
+"scripts/*" = ["T201"]  # CLI scripts are allowed to print
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 addopts = "--strict-markers"

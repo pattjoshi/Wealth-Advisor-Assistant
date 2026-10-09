@@ -1,0 +1,157 @@
+{
+  "client_id": "client_002",
+  "full_name": "Ben Carter",
+  "date_of_birth": "1985-11-02",
+  "base_currency": "USD",
+  "accounts": [
+    {
+      "account_id": "A002-BRK",
+      "account_type": "brokerage",
+      "balance": 120000.0,
+      "holdings": [
+        {
+          "symbol": "TSLA",
+          "asset_class": "equity",
+          "sector": "automotive",
+          "quantity": 500,
+          "value": 95000.0
+        },
+        {
+          "symbol": "BND",
+          "asset_class": "bond",
+          "sector": "fixed_income",
+          "quantity": 150,
+          "value": 15000.0
+        }
+      ]
+    },
+    {
+      "account_id": "A002-CHK",
+      "account_type": "checking",
+      "balance": 48000.0,
+      "holdings": []
+    }
+  ],
+  "transactions": [
+    {
+      "transaction_id": "T002-000",
+      "date": "2026-07-05",
+      "amount": 113.81,
+      "category": "groceries",
+      "payee": "Groceries Co",
+      "type": "debit"
+    },
+    {
+      "transaction_id": "T002-001",
+      "date": "2026-07-12",
+      "amount": 41.55,
+      "category": "utilities",
+      "payee": "Utilities Co",
+      "type": "debit"
+    },
+    {
+      "transaction_id": "T002-002",
+      "date": "2026-07-21",
+      "amount": 101.86,
+      "category": "dining",
+      "payee": "Dining Co",
+      "type": "debit"
+    },
+    {
+      "transaction_id": "T002-003",
+      "date": "2026-07-26",
+      "amount": 103.08,
+      "category": "groceries",
+      "payee": "Groceries Co",
+      "type": "debit"
+    },
+    {
+      "transaction_id": "T002-004",
+      "date": "2026-08-01",
+      "amount": 91.69,
+      "category": "utilities",
+      "payee": "Utilities Co",
+      "type": "debit"
+    },
+    {
+      "transaction_id": "T002-005",
+      "date": "2026-08-14",
+      "amount": 99.19,
+      "category": "dining",
+      "payee": "Dining Co",
+      "type": "debit"
+    },
+    {
+      "transaction_id": "T002-006",
+      "date": "2026-08-16",
+      "amount": 104.94,
+      "category": "groceries",
+      "payee": "Groceries Co",
+      "type": "debit"
+    },
+    {
+      "transaction_id": "T002-007",
+      "date": "2026-08-20",
+      "amount": 143.65,
+      "category": "utilities",
+      "payee": "Utilities Co",
+      "type": "debit"
+    },
+    {
+      "transaction_id": "T002-A1",
+      "date": "2026-08-22",
+      "amount": 45000.0,
+      "category": "transfer",
+      "payee": "External Account",
+      "type": "transfer_out"
+    },
+    {
+      "transaction_id": "T002-A2a",
+      "date": "2026-08-27",
+      "amount": 1200.0,
+      "category": "rent",
+      "payee": "Skyline Properties",
+      "type": "debit"
+    },
+    {
+      "transaction_id": "T002-A2b",
+      "date": "2026-08-28",
+      "amount": 1200.0,
+      "category": "rent",
+      "payee": "Skyline Properties",
+      "type": "debit"
+    },
+    {
+      "transaction_id": "T002-A3-0",
+      "date": "2026-08-30",
+      "amount": 477.3,
+      "category": "shopping",
+      "payee": "Luxury Retail",
+      "type": "debit"
+    },
+    {
+      "transaction_id": "T002-A3-1",
+      "date": "2026-08-29",
+      "amount": 490.15,
+      "category": "shopping",
+      "payee": "Luxury Retail",
+      "type": "debit"
+    },
+    {
+      "transaction_id": "T002-A3-2",
+      "date": "2026-08-28",
+      "amount": 378.79,
+      "category": "shopping",
+      "payee": "Luxury Retail",
+      "type": "debit"
+    },
+    {
+      "transaction_id": "T002-A3-3",
+      "date": "2026-08-27",
+      "amount": 311.54,
+      "category": "shopping",
+      "payee": "Luxury Retail",
+      "type": "debit"
+    }
+  ]
+}
