@@ -17,7 +17,7 @@ Every phase file follows the same structure:
 | [1](phase-1.md) | Schemas and mock data | Done |
 | [2](phase-2.md) | Tool layer and mock CRM | Done |
 | [3](phase-3.md) | Agents, graph and CLI (MVP) | Done |
-| [4](phase-4.md) | Logging and hardening | Not started |
+| [4](phase-4.md) | Logging and hardening | Done |
 | [5](phase-5.md) | LLM insight with cost control | Not started |
 | [6](phase-6.md) | Memory (short-term and long-term) | Not started |
 | [7](phase-7.md) | Human-in-the-loop | Not started |
