@@ -13,6 +13,10 @@ from wealth_advisor.agents.insight import InsightAgent
 from wealth_advisor.config import settings
 from wealth_advisor.graph.builder import build_graph
 from wealth_advisor.graph.state import new_state
+from wealth_advisor.llm.base import LLMClient
+from wealth_advisor.llm.cache import LLMCache
+from wealth_advisor.llm.mock_client import MockLLMClient
+from wealth_advisor.llm.openai_client import OpenAIClient
 from wealth_advisor.observability.logging import configure_logging
 from wealth_advisor.schemas.report import AdvisoryReport
 from wealth_advisor.services.mock_crm import MockCrmService
@@ -22,8 +26,26 @@ from wealth_advisor.tools.crm import CrmTool
 from wealth_advisor.tools.portfolio_metrics import PortfolioMetricsTool
 
 
+def build_llm_client() -> LLMClient:
+    """OpenAI when an API key is configured, MockLLMClient otherwise — automatic, no
+    flag needed. Tests never set OPENAI_API_KEY, so they always get MockLLMClient."""
+    if settings.openai_api_key:
+        return OpenAIClient(
+            api_key=settings.openai_api_key,
+            model=settings.openai_model,
+            max_output_tokens=settings.llm_max_output_tokens,
+            temperature=settings.llm_temperature,
+        )
+    return MockLLMClient()
+
+
 def build_app(
-    *, clients_dir: Path, crm_records_file: Path, crm_failure_rate: float
+    *,
+    clients_dir: Path,
+    crm_records_file: Path,
+    crm_failure_rate: float,
+    llm_client: LLMClient | None = None,
+    cache_db_path: Path | str = ":memory:",
 ) -> CompiledStateGraph:
     client_data_tool = ClientDataTool(clients_dir)
     crm_service = MockCrmService(crm_records_file, failure_rate=crm_failure_rate)
@@ -31,7 +53,7 @@ def build_app(
     data_fetcher = DataFetcherAgent(client_data_tool, crm_tool)
 
     analyzer = AnalyzerAgent(PortfolioMetricsTool(), AnomalyDetectionTool())
-    insight = InsightAgent()
+    insight = InsightAgent(llm_client or MockLLMClient(), LLMCache(cache_db_path))
 
     return build_graph(data_fetcher, analyzer, insight)
 
@@ -43,6 +65,8 @@ def run_client(client_id: str, *, crm_failure_rate: float | None = None) -> Advi
         crm_failure_rate=(
             crm_failure_rate if crm_failure_rate is not None else settings.crm_failure_rate
         ),
+        llm_client=build_llm_client(),
+        cache_db_path=settings.db_path,  # persists across CLI invocations
     )
     run_id = str(uuid.uuid4())
     initial_state = new_state(run_id=run_id, client_id=client_id, thread_id=client_id)
@@ -56,6 +80,7 @@ def run_client(client_id: str, *, crm_failure_rate: float | None = None) -> Advi
         anomalies=final_state.get("anomalies", []),
         metrics=final_state.get("metrics", {}),
         insights=final_state.get("insights"),
+        llm_cost=final_state.get("llm_cost"),
         data_quality=final_state.get(
             "data_quality", {"missing_fields": [], "assumptions": [], "degraded_sources": []}
         ),

@@ -20,6 +20,14 @@ class DataQualityReport(TypedDict):
     degraded_sources: list[str]
 
 
+class LLMCostReport(TypedDict):
+    tokens: int
+    estimated_cost_usd: float
+    cached: bool
+    model: str
+    fallback_reason: str | None
+
+
 class WealthAdvisorState(TypedDict, total=False):
     """Shared graph state. Nodes return partial updates (a dict with only the keys they
     changed); LangGraph merges them. Never mutate a state value returned from a node —
@@ -38,6 +46,7 @@ class WealthAdvisorState(TypedDict, total=False):
     risk_score: float | None
 
     insights: str | None
+    llm_cost: LLMCostReport | None
 
     review_decision: str | None
 
@@ -59,6 +68,7 @@ def new_state(*, run_id: str, client_id: str, thread_id: str) -> WealthAdvisorSt
         anomalies=[],
         risk_score=None,
         insights=None,
+        llm_cost=None,
         review_decision=None,
         errors=[],
         trace=[],

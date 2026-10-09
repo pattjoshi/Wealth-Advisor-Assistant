@@ -28,7 +28,9 @@ def test_happy_path_client_with_anomalies() -> None:
     assert final["status"] == "completed"
     assert len(final["anomalies"]) == 4
     assert final["risk_score"] is not None
-    assert "finding(s) identified" in final["insights"]
+    assert "[MockLLM" in final["insights"]
+    assert final["llm_cost"]["fallback_reason"] is None
+    assert final["llm_cost"]["model"] == "mock-llm"
 
 
 def test_crm_down_degrades_but_completes() -> None:

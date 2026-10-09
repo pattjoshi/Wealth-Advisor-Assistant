@@ -4,7 +4,7 @@ from typing import Any, Literal
 
 from pydantic import BaseModel
 
-from wealth_advisor.graph.state import AnomalyFinding, DataQualityReport
+from wealth_advisor.graph.state import AnomalyFinding, DataQualityReport, LLMCostReport
 
 
 class AdvisoryReport(BaseModel):
@@ -18,5 +18,6 @@ class AdvisoryReport(BaseModel):
     anomalies: list[AnomalyFinding]
     metrics: dict[str, Any]
     insights: str | None
+    llm_cost: LLMCostReport | None
     data_quality: DataQualityReport
     errors: list[str]
